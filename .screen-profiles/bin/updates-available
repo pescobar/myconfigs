@@ -1,0 +1,97 @@
+#!/bin/sh -e
+#
+#    updates-available: calculate and cache the number of updates available
+#    Copyright (C) 2008 Canonical Ltd.
+#
+#    Authors: Dustin Kirkland <kirkland@canonical.com>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# expire the cache in X seconds; 1 hour by default
+EXPIRATION=3600
+
+print_updates() {
+	u=$1
+	s=$2
+	if [ -n "$u" ]; then
+		if [ "$u" -gt 0 ]; then
+			printf "\005{=b rW}%d!" "$u"
+			if [ -n "$s" ]; then
+				if [ "$s" -gt 0 ]; then
+					printf "!"
+				fi
+			fi
+			printf "\005{-} "
+		fi
+	fi
+	exit 0
+}
+
+cache=/var/run/updates-available
+mycache=$HOME/.screen-profiles/updates-available
+now=`date +%s`
+cache_timestamp=`stat -c "%Y" $cache 2>/dev/null || echo 0`
+mycache_timestamp=`stat -c "%Y" $mycache 2>/dev/null || echo 0`
+diff=`expr $now - $cache_timestamp`
+u=
+# If global updates-available cache is present, and newer than mycache, and
+# within expiration, use it, and cache it (to preserve across reboots).
+# Only available in Jaunty+.
+if [ -r $cache -a $cache_timestamp -gt $mycache_timestamp -a $diff -lt $EXPIRATION ]; then
+	u=`grep -m 1 "^[0-9]" $cache | sed "s/\s.*$//"`
+	s=`grep -m 2 "^[0-9]" $cache | tail -n 1 | sed "s/\s.*$//"`
+	cp -a "$cache" "$mycache"
+	print_updates $u $s
+fi
+
+# If the user's updates-available cache is present, and less than an hour old,
+# use it.  (The "hour" part should be configurable)
+if [ -r $mycache -a -O $mycache ]; then
+	diff=`expr $now - $mycache_timestamp`
+	if [ $diff -lt $EXPIRATION ]; then
+		print_updates `cat $mycache`
+	fi
+else
+	# Otherwise, let's quickly clear the cache, and then recreate it with
+	# a really old timestamp (so that it get's updated on next run)
+	# and exit immediately
+	rm -f $mycache
+	touch -t 197001010000 $mycache
+	exit 0
+fi
+
+# If we make it to this point, we actually have to do hard computational
+# work to calculate updates.  Let's try to be "nice" about it:
+renice 10 $$ >/dev/null 2>&1 || true
+ionice -c3 -p $$ >/dev/null 2>&1 || true
+
+# These are very computationally intensive processes.
+# Background this work, have it write to the cache files,
+# and let the next cache check pick up the results.
+
+if [ -x /usr/lib/update-notifier/apt-check ]; then
+	# If apt-check binary exists, use it
+	/usr/lib/update-notifier/apt-check 2>&1 | tail -n 1 | sed "s/;/ /" > $mycache &
+elif [ -x /usr/bin/apt-get ]; then
+	# If apt-get exists, use it
+	/usr/bin/apt-get -s -o Debug::NoLocking=true upgrade | grep -c ^Inst > $mycache &
+elif [ -x /usr/bin/zypper ]; then
+	# If zypper exists, use it
+	/usr/bin/zypper --no-refresh lu --best-effort | grep 'v |' | wc -l > $mycache &
+elif [ -x /usr/bin/yum ]; then
+	# If yum exists, use it
+	/usr/bin/yum list updates | grep -c "updates" > $mycache &
+else
+	# If we're here, we have no idea
+	print_updates "?"
+fi

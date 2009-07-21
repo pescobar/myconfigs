@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/pablotools/!svn/ver/23/vimconfig/.vim/bash-support/codesnippets
+END
+create-tempfile-with-trap
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/pablotools/!svn/ver/23/vimconfig/.vim/bash-support/codesnippets/create-tempfile-with-trap
+END
+usage-and-command-line-arguments.noindent
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/pablotools/!svn/ver/23/vimconfig/.vim/bash-support/codesnippets/usage-and-command-line-arguments.noindent
+END
+print-command-line-options
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/pablotools/!svn/ver/23/vimconfig/.vim/bash-support/codesnippets/print-command-line-options
+END
+read-and-split-into-array
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/pablotools/!svn/ver/23/vimconfig/.vim/bash-support/codesnippets/read-and-split-into-array
+END
+use-file-descriptor-read
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/pablotools/!svn/ver/23/vimconfig/.vim/bash-support/codesnippets/use-file-descriptor-read
+END
+basename-function
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/pablotools/!svn/ver/23/vimconfig/.vim/bash-support/codesnippets/basename-function
+END
+well-behaved-script
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/pablotools/!svn/ver/23/vimconfig/.vim/bash-support/codesnippets/well-behaved-script
+END
+assert
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/pablotools/!svn/ver/23/vimconfig/.vim/bash-support/codesnippets/assert
+END
+timestamp
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/pablotools/!svn/ver/23/vimconfig/.vim/bash-support/codesnippets/timestamp
+END
+basename+pathname
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/pablotools/!svn/ver/23/vimconfig/.vim/bash-support/codesnippets/basename+pathname
+END
+create-tempfile
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/pablotools/!svn/ver/23/vimconfig/.vim/bash-support/codesnippets/create-tempfile
+END
+free-software-comment
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/pablotools/!svn/ver/23/vimconfig/.vim/bash-support/codesnippets/free-software-comment
+END
+check-number-of-command-line-arguments
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/pablotools/!svn/ver/23/vimconfig/.vim/bash-support/codesnippets/check-number-of-command-line-arguments
+END
+create-tempfile-in-secure-manner
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/pablotools/!svn/ver/23/vimconfig/.vim/bash-support/codesnippets/create-tempfile-in-secure-manner
+END
+use-file-descriptor-write
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/pablotools/!svn/ver/23/vimconfig/.vim/bash-support/codesnippets/use-file-descriptor-write
+END

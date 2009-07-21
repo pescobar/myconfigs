@@ -1,0 +1,9 @@
+just my screen and vim configs.
+
+to customize screen see .screenrc and ~/.screen-profiles/status
+
+vim configured to work with bash and python files
+also configured to easily comment many different filetypes (NERD_commenter plugin)
+
+keybindings configured to not overwrite each other.
+

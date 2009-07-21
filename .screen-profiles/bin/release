@@ -1,0 +1,38 @@
+#!/bin/sh -e
+#
+#    release: grab the os/distro release
+#    Copyright (C) 2008 Canonical Ltd.
+#
+#    Authors: Dustin Kirkland <kirkland@canonical.com>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+if which lsb_release >/dev/null; then
+	# If lsb_release is available, use it
+	r=$(lsb_release -s -d)
+	if echo "$r" | grep -qs "^Ubuntu .*\..*\..*$"; then
+		# Use the -d if an Ubuntu LTS
+		printf "\005{=b }%s\005{-} " "$r"
+	else
+		# But for other distros the description
+		# is too long, so build from -i and -r
+		i=$(lsb_release -s -i)
+		r=$(lsb_release -s -r)
+		printf "\005{=b }%s %s\005{-} " "$i" "$r"
+	fi
+elif [ -r "/etc/issue" ]; then
+	# Otherwise, grab part of /etc/issue
+	printf "\005{=b }%s\005{-} " $(head -n1 /etc/issue | awk '{print $1}')
+else
+	echo "Unknown"
+fi
