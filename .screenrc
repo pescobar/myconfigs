@@ -5,50 +5,13 @@
 #
 # For more information, source code, questions, and bugs, see:
 #  * https://launchpad.net/screen-profiles
-#
-#    Copyright (C) 2008 Canonical Ltd.
-#
-#    Author: Dustin Kirkland <kirkland@canonical.com>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, version 3 of the License.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-###############################################################################
-
-###############################################################################
-#    Screen common profile
-#      This configuration profile is intended to be a common header of useful
-#      functionality, included by other profiles.
-#
-#    Copyright (C) 2008 Canonical Ltd.
-#
-#    Authors: Dustin Kirkland <kirkland@canonical.com>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, version 3 of the License.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ###############################################################################
 
 # Now, let's override with our customizations
 startup_message off
 vbell off
 msgwait 1
+autodetach on
 
 # Define status commands
 backtick 99  86400 86400 $HOME/.screen-profiles/screen-profiles-status logo
@@ -83,36 +46,15 @@ altscreen on
 # Log 10000 lines
 defscrollback 10000
 
-
-
 ###############################################################################
 
 ###############################################################################
 #    GNU Screen common keybindings
 #      This configuration profile is intended to be a common header of useful
 #      keybindings, included by other profiles.
-#
-#    Copyright (C) 2008  Nick Barcet <nick.barcet@canonical.com>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, version 3 of the License.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ###############################################################################
 
 # This file defines the common key bindings
-#
-# For a keybinding to live in the "common" area, it must be verified to
-# work in at least:
-#  * gnome-terminal
-#  * console tty
 #
 # bindkey commands should be followed by a comment that will be used in the
 # help file (one day).  The command should be formated as:
@@ -132,37 +74,12 @@ bindkey -k k4 next					# F4  | Next Window
 bindkey -k k9 screen -t help 0 screen-profiles		# F9  | Configuration
 							# F10 | 'toolbar' in gnome-terminal
 							# F11 | 'fullscreen' in gnome-terminal
-#bindkey -k F2 lockscreen				# F12 | Lock this terminal
+bindkey -k F2 lockscreen				# F12 | Lock this terminal
 
 # probando
-register m "^ax^a^d"
-bindkey -k F2 process m			# F12 | Lock this terminal
+#register m "^ax^a^d"
+#bindkey -k F2 process m			# F12 | Lock this terminal
 ###############################################################################
-
-###############################################################################
-###############################################################################
-#    Screen Profile
-#      This configuration profile is intended to roughly approximate graphical
-#      desktop within 'screen'; inspired by the Ubuntu Gnome Desktop.
-#
-#    Copyright (C) 2008 Canonical Ltd.
-#
-#    Authors: Dustin Kirkland <kirkland@canonical.com>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, version 3 of the License.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-###############################################################################
-
-
 
 # Window tabs, second to last line
 caption always "%{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw%? %= %{= kw}%110`%109`%111`"

@@ -1,26 +1,26 @@
-#para tener scroll-back 2048 lineas
+# this config works standalone without the .screen-profiles dir
+
+# scrollback 10000 lines
 termcapinfo xterm|xterms|xs|rxvt ti@:te@
 defscrollback 10000
-###
+
 #### detach on hangup
 autodetach on
-###
+
 #### don't display the copyright page
 startup_message off
-###
+
 #### emulate .logout message
 pow_detach_msg "Screen session of $LOGNAME $:cr:$:nl:ended."
-###
-##
+
 ## status bar v1
 ##### alternative caption, gives window list, LOGNAME and current date:
 caption always "%u%{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw %=  %{mk}host:%H Load:%l  %{ck}%M%{wk} %{ck}%d %{gk}%c"
-#
+
 ## status bar v2
 ##hardstatus alwayslastline
 ##hardstatus string "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %H %{..Y} %d/%m %C%a Load: %l"
 ##caption always "%3n %t%? @%u%?%? [%h]%?"a
-##
 
 
 # open multiple tabs by default
@@ -31,7 +31,8 @@ caption always "%u%{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw %=  %{mk}host:%H
 
 # use mkpassword to generate new password
 #password ODSJQf.4IJN7E #1234
-#
+
+#bindkeys
                                                         # F1  | 'help' in gnome-terminal
 register n "^a^c^aA"                                    #     | Goes with the F2 definition
 bindkey -k k2 process n                                 # F2  | Create new window (and name it)
