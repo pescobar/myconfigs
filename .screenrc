@@ -184,3 +184,10 @@ hardstatus string '%99`%{= kw} %100`%112`%= %102`%101`%114`%115`%108`%113`%119`%
 # PASSWORD PROTECT YOUR SESSION WHEN DETACH
 # to generate your password use "mkpasswd yourpasswd"
 # password ODSJQf.4IJN7E # example with passwd "1234"
+#
+# open multiple tabs by default 
+# #screen -t work 0
+# #screen -t shell 1
+# #screen -t others 2
+# #select 0
+#
