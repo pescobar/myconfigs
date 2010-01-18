@@ -8,15 +8,24 @@
 #       colored man pages
 #	
 #	improved bash_history to share same history in every shell and add date+time to every commmand in bash_history
-#          
+#
+
+# be sure to do to all this on interactive shells only
+if [ "$PS1" ]; then
+
+if [ -e /etc/bashrc ]; then
+      . /etc/bashrc
+fi
+
+if [ -e /etc/bash.bashrc ]; then
+       . /etc/bash.bashrc
+fi
 
 PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin
 PATH=${PATH}:/usr/games:/usr/local/bin:/usr/local/sbin
 export PATH
 export EDITOR=vim
 
-# be sure to do to all this on interactive shells only
-if [ "$PS1" ]; then
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -44,20 +53,6 @@ fi
        -o user,pid,ppid,pgid,stime,stat,wchan,time,pcpu,pmem,vsz,rss,sz,args |
        sed 's/^/ /' | less
   }
-
-  # ssh keymanager - see http://wiki.splitbrain.org/ssh
-  if [ -e /usr/bin/keychain ]; then
-    keychain -q ~/.ssh/id_dsa
-    if [ -e ~/.ssh-agent-${HOSTNAME} ]; then
-      . ~/.ssh-agent-${HOSTNAME}
-    fi
-    if [ -e ~/.keychain/${HOSTNAME}-sh ]; then
-      . ~/.keychain/${HOSTNAME}-sh
-    fi
-  fi
-
-# use zssh if available
-  if [ -e /usr/bin/zssh ]; then alias ssh='zssh -z ^W'; fi
 
 # daily temp dir
 #  export TD="$HOME/temp/`date +'%Y-%m-%d'`"
@@ -192,6 +187,7 @@ fi
 
 myprompt -l
 
+
 # color man pages
 ###########################################
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -202,11 +198,6 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-#alias
-###########################################
-alias ll="ls -l -h --color=auto"
-alias ls="ls --color=auto"
-fi
 
 # .bash_history
 ###########################################
@@ -220,3 +211,14 @@ HISTTIMEFORMAT="%m/%h - %H:%M:%S   " # add date+time to commands in history
 export PROMPT_COMMAND="history -a; history -r; $PROMPT_COMMAND"
 
 
+
+#alias
+###########################################
+alias ll="ls -l -h --color=auto"
+alias ls="ls --color=auto"
+alias lt='ls -ltr'
+alias grep='grep --color'
+alias g='grep --color'
+
+
+fi
