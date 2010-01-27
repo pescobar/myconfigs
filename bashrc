@@ -5,13 +5,10 @@
 #       
 #	unprivileged user shows blue prompt. root shows red prompt
 #       
-#       colored man pages
+#       colored man pages - two different color schemes.
 #	
 #	improved bash_history to share same history in every shell and add date+time to every commmand in bash_history
 #
-
-# be sure to do to all this on interactive shells only
-if [ "$PS1" ]; then
 
 if [ -e /etc/bashrc ]; then
       . /etc/bashrc
@@ -108,7 +105,7 @@ if [[ $1 = "-h" || $1 = "--help" || $1 = "-?" ]]; then
         echo "       myprompt [-s | -l]"
         echo " "
         echo "DESCRIPTION:"
-        echo "      Format the PS1 prompt string to have colors."
+        echo "      Format the PS1 prompt string to show full path or just local directory"
         echo " "
         echo "      -s, --short"
         echo "            Default option shows the path as a truncated."
@@ -133,6 +130,7 @@ fi
 ## if load is high shows hostname in red
 ########################################
 
+# I have dual-core. I get red prompt with load higher than 2
 THRESHOLD_LOAD=200
 
 ONE=$(uptime | sed -e "s/.*load average: \(.*\...\), \(.*\...\), \(.*\...\)/\1/" -e "s/ //g")
@@ -143,10 +141,8 @@ ONEHUNDRED=$(echo -e "scale=0 \n $ONE/0.01 \nquit \n" | bc)
 if [ $ONEHUNDRED -gt $THRESHOLD_LOAD ]
 then
     HOST_COLOUR=$YELLOW
-        # Light Red
 else
     HOST_COLOUR=$YELLOW
-        # Light green
 fi
 
 # end load function
@@ -188,15 +184,28 @@ fi
 myprompt -l
 
 
-# color man pages
+# color man pages (red and green)
 ###########################################
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;31m'
+#export LESS_TERMCAP_mb=$'\E[01;31m'
+#export LESS_TERMCAP_md=$'\E[01;31m'
+#export LESS_TERMCAP_me=$'\E[0m'
+#export LESS_TERMCAP_se=$'\E[0m'
+#export LESS_TERMCAP_so=$'\E[01;44;33m'
+#export LESS_TERMCAP_ue=$'\E[0m'
+#export LESS_TERMCAP_us=$'\E[01;32m'
+###########################################
+
+
+## color man pages (blue and green) - I prefer this for dark background
+###########################################
+export LESS_TERMCAP_mb=$'\E[00;36m'
+export LESS_TERMCAP_md=$'\E[00;36m'
 export LESS_TERMCAP_me=$'\E[0m'
 export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_so=$'\E[00;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;32m'
+export LESS_TERMCAP_us=$'\E[00;32m'
+###########################################
 
 
 # .bash_history
@@ -210,8 +219,6 @@ HISTTIMEFORMAT="%m/%h - %H:%M:%S   " # add date+time to commands in history
 # so we share same history on every shell
 export PROMPT_COMMAND="history -a; history -r; $PROMPT_COMMAND"
 
-
-
 #alias
 ###########################################
 alias ll="ls -l -h --color=auto"
@@ -219,6 +226,3 @@ alias ls="ls --color=auto"
 alias lt='ls -ltr'
 alias grep='grep --color'
 alias g='grep --color'
-
-
-fi
