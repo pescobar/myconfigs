@@ -1,4 +1,5 @@
-# this config works standalone without the .screen-profiles dir
+# force a shell and profile reload
+shell -$SHELL
 
 # scrollback 10000 lines
 termcapinfo xterm|xterms|xs|rxvt ti@:te@
@@ -15,12 +16,12 @@ pow_detach_msg "Screen session of $LOGNAME $:cr:$:nl:ended."
 
 ## status bar v1
 ##### alternative caption, gives window list, LOGNAME and current date:
-caption always "%u%{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw %=  %{mk}host:%H Load:%l  %{ck}%M%{wk} %{ck}%d %{gk}%c"
+caption always "%u%{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw %= %{mk}host:%H Load:%l %{ck}%M%{wk} %{ck}%d %{gk}%c"
 
 ## status bar v2
 ##hardstatus alwayslastline
-##hardstatus string "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %H %{..Y} %d/%m %C%a Load: %l"
-##caption always "%3n %t%? @%u%?%? [%h]%?"a
+#hardstatus string "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %H %{..Y} %d/%m %C%a Load: %l"
+#caption always "%3n %t%? @%u%?%? [%h]%?"a
 
 
 # open multiple tabs by default
@@ -32,20 +33,35 @@ caption always "%u%{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw %=  %{mk}host:%H
 # use mkpassword to generate new password
 #password ODSJQf.4IJN7E #1234
 
-#bindkeys
-                                                        # F1  | 'help' in gnome-terminal
-register n "^a^c^aA"                                    #     | Goes with the F2 definition
-bindkey -k k2 process n                                 # F2  | Create new window (and name it)
-bindkey -k k3 prev                                      # F3  | Previous Window
-bindkey -k k4 next                                      # F4  | Next Window
-#register r "^a:source $HOME/.screenrc" #     | Goes with F5 definition
-#bindkey -k k5 process r                                        # F5  | Reload profile
-#bindkey -k k6 detach                                   # F6  | Detach from this session
-#bindkey -k k7 copy                                     # F7  | Enter copy/scrollback mode
-#bindkey -k k8 help                                     # F8  | Advanced help/keybindings
-#bindkey -k k9 screen -t help 0 screen-profiles          # F9  | Configuration
-                                                        # F10 | 'toolbar' in gnome-terminal
-                                                        # F11 | 'fullscreen' in gnome-terminal
-bindkey -k F2 lockscreen                               # F12 | Lock this terminal
+#	bindkeys  debian   ######
+#	F2 - F3 - F4 - F6  ######
+#################################
+                                                        # F1 | 'help' in gnome-terminal
+register n "^a^c^aA" # | Goes with the F2 definition
+bindkey -k k2 process n # F2 | Create new window (and name it)
+bindkey -k k3 prev # F3 | Previous Window
+bindkey -k k4 next # F4 | Next Window
+#register r "^a:source $HOME/.screenrc" # | Goes with F5 definition
+#bindkey -k k5 process r # F5 | Reload profile
+bindkey -k k1 detach # F6 | Detach from this session
+#bindkey -k k7 copy # F7 | Enter copy/scrollback mode
+#bindkey -k k8 help # F8 | Advanced help/keybindings
+#bindkey -k k9 screen -t help 0 screen-profiles # F9 | Configuration
+# F10 | 'toolbar' in gnome-terminal
+# F11 | 'fullscreen' in gnome-terminal
+bindkey -k F2 lockscreen # F12 | Lock this terminal
 
 
+#   bindkeys redhat         ##############
+#   F9 - F10 - F11 -F12	    ##############
+##########################################
+#register n "^a^c^aA" # | Goes with the F2 definition
+#bindkey -k k9 process n # F9 | Create new window (and name it)
+#bindkey -k k; prev # F10 | Previous Window
+#bindkey -k F1 next # F11 | Next Window
+#bindkey -k F2 lockscreen # F12 | Lock this terminal
+############################################
+#
+
+#change ^Aa default scape key to ^Tt to run screen inside screen
+#escape ^Tt
