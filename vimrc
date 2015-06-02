@@ -37,7 +37,7 @@ map <C-Right> <ESC>:tabnext<CR>
 map <C-Left> <ESC>:tabprev<CR>
 
 " Do smart autoindenting when starting a new line
-"set smartindent
+set smartindent
 
 " F5 switch to paste mode if you are in insert mode
 set pastetoggle=<F5>
