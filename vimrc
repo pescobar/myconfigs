@@ -70,7 +70,9 @@ set t_Co=256
 set laststatus=2
 
 "to show top bar with buffers (vim-airline)
-"let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline#extensions#tabline#show_buffers = 0
 
 " to disable trailing white spaces detector (vim airline)
 let g:airline#extensions#whitespace#enabled = 0
